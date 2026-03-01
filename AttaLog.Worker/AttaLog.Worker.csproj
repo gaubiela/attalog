@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+	<TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-AttaLog.Worker-205d8084-43fd-426b-849a-f693046c4e17</UserSecretsId>
@@ -14,5 +14,7 @@
   <ItemGroup>
     <ProjectReference Include=".\AttaLog.Application\AttaLog.Application.csproj" />
     <ProjectReference Include=".\AttaLog.Infrastructure\AttaLog.Infrastructure.csproj" />
+    <ProjectReference Include="..\AttaLog.Application\AttaLog.Application.csproj" />
+    <ProjectReference Include="..\AttaLog.Infrastructure\AttaLog.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
