@@ -1,4 +1,5 @@
 using AttaLog.Domain.Entities;
+using AttaLog.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,7 +24,7 @@ public class GroupInviteConfiguration : IEntityTypeConfiguration<GroupInvite>
             .IsRequired();
 
         builder.Property(gi => gi.Status)
-            .HasDefaultValue(0);
+            .HasDefaultValue(InviteStatus.Pending);
 
         builder.HasOne(gi => gi.Group)
             .WithMany(g => g.Invites)
