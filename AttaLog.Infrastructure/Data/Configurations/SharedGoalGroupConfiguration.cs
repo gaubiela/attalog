@@ -19,5 +19,7 @@ public class SharedGoalGroupConfiguration : IEntityTypeConfiguration<SharedGoalG
             .WithMany(g => g.SharedGoals)
             .HasForeignKey(sg => sg.GroupId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasQueryFilter(s => !s.Goal.IsDeleted);
     }
 }

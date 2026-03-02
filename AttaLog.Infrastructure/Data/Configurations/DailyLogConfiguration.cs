@@ -23,5 +23,7 @@ public class DailyLogConfiguration : IEntityTypeConfiguration<DailyLog>
             .WithMany(u => u.DailyLogs)
             .HasForeignKey(dl => dl.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasQueryFilter(d => !d.Goal.IsDeleted);
     }
 }
