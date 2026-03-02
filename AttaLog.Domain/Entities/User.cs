@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace AttaLog.Domain.Entities;
 
-public class User : BaseEntity
+public class User : IdentityUser<Guid>
 {
-    public string Email { get; set; }
-    public string PasswordHash { get; set; }
     public string Name { get; set; }
     public string? AvatarUrl { get; set; }
     public DateTime? LastLoginAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<GroupMember> GroupMembers { get; set; } = [];
     public ICollection<Goal> Goals { get; set; } = [];
