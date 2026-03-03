@@ -22,6 +22,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public DbSet<FinanceCategory> FinanceCategories { get; set; }
     public DbSet<FinanceTransaction> FinanceTransactions { get; set; }
     public DbSet<FinanceInvestment> FinanceInvestments { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
