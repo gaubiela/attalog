@@ -28,6 +28,10 @@ public class AuthService : IAuthService
 
     public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
     {
+        var existing = await _userManager.FindByEmailAsync(request.Email);
+        if (existing != null)
+            throw new InvalidOperationException("Email already in use.");
+
         var user = new User
         {
             UserName = request.Email,
@@ -40,7 +44,7 @@ public class AuthService : IAuthService
         if (!result.Succeeded)
         {
             var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new InvalidOperationException($"Failed to create user: {errors}");
+            throw new InvalidOperationException(errors);
         }
 
         return await GenerateAuthResponseAsync(user);
@@ -48,12 +52,13 @@ public class AuthService : IAuthService
 
     public async Task<AuthResponse> LoginAsync(LoginRequest request)
     {
-        var user = await _userManager.FindByEmailAsync(request.Email)
-            ?? throw new UnauthorizedAccessException("Invalid credentials.");
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user == null)
+            throw new InvalidOperationException("Invalid email or password.");
 
         var valid = await _userManager.CheckPasswordAsync(user, request.Password);
         if (!valid)
-            throw new UnauthorizedAccessException("Invalid credentials.");
+            throw new InvalidOperationException("Invalid email or password.");
 
         user.LastLoginAt = DateTime.UtcNow;
         await _userManager.UpdateAsync(user);

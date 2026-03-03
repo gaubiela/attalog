@@ -1,3 +1,4 @@
+using AttaLog.Api.Middleware;
 using AttaLog.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
