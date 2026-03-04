@@ -11,6 +11,9 @@ public class GroupConfiguration : IEntityTypeConfiguration<Group>
         builder.Property(g => g.Name)
             .HasMaxLength(100);
 
+        builder.Property(g => g.IsDeleted)
+            .HasDefaultValue(false);
+
         builder.HasOne(g => g.CreatedBy)
             .WithMany()
             .HasForeignKey(g => g.CreatedById)
