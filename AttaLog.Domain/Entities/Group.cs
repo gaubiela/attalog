@@ -4,6 +4,7 @@ public class Group : BaseEntity
 {
     public string? Name { get; set; }
     public Guid CreatedById { get; set; }
+    public bool IsDeleted { get; set; }
 
     public User CreatedBy { get; set; }
     public ICollection<GroupMember> Members { get; set; } = [];

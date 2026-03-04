@@ -44,6 +44,9 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IGroupService, GroupService>();
+        services.AddScoped<IInviteService, InviteService>();
+        services.AddScoped<IEmailService, EmailService>();
 
         return services;
     }
